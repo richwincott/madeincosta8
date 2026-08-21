@@ -20,12 +20,12 @@
     </style>
 </head>
 <body style="text-align: center;">
-    <img src="763907261_18003302318978503_5232659097694014864_n.jpg" style="width:800px; max-width: 100%;" alt="">
+    <img src="<?php echo get_template_directory_uri(); ?>/img/763907261_18003302318978503_5232659097694014864_n.jpg" style="width:800px; max-width: 100%;" alt="">
     <p>coming soon</p>
     <p><a href="https://www.instagram.com/madeincosta8/" style="display: flex;
     align-items: center;
     justify-content: center; margin-right: 10px;">
-        <img src="instagram_logo_icon_189247-4278989595.png" width="40px" alt="">
+        <img src="<?php echo get_template_directory_uri(); ?>/img/instagram_logo_icon_189247-4278989595.png" width="40px" alt="">
         madeincosta8
     </a></p>
 </body>
