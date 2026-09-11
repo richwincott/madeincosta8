@@ -5,5 +5,6 @@
             madeincosta8
         </a></p>
 
+    <?php wp_footer(); ?>
     </body>
 </html>

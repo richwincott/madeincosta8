@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<div style="flex: 1;">
+<div class="site-content">
     <?php the_title(); ?>
     <?php the_content(); ?>
 </div>
