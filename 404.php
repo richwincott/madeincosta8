@@ -1,3 +1,3 @@
 <?php get_header(); ?>
-home
+404 Not Found
 <?php get_footer(); ?>
