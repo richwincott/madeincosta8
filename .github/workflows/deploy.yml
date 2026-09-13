@@ -1,0 +1,29 @@
+name: Deploy theme to server
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install deploy SSH key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
+
+      - name: Add server to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          echo "madeincosta8.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG5y5Uir8uh/cxt6edJDyZ8NIbpI+09GVMps0rCi8TcV" >> ~/.ssh/known_hosts
+
+      - name: Deploy via rsync
+        run: |
+          rsync -avz --delete \
+            --exclude ".git" \
+            --exclude ".github" \
+            ./ deploy@madeincosta8.com:/var/www/html/wp-content/themes/madeincosta8/

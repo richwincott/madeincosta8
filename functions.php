@@ -50,3 +50,14 @@ function mytheme_enqueue_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', 'mytheme_enqueue_scripts' );
+
+function mytheme_coming_soon_gate() {
+    if ( is_user_logged_in() || is_admin() || wp_doing_ajax() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+        return;
+    }
+
+    include get_template_directory() . '/coming-soon.php';
+    exit;
+}
+
+add_action( 'template_redirect', 'mytheme_coming_soon_gate' );
