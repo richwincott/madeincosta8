@@ -22,17 +22,20 @@ html, body {
 }
 
 /* WordPress pushes <html> down with margin-top (via an inline style it
-   injects itself) to make room for the admin bar. It marks this state with
-   an "admin-bar" class on <body>, not <html> - so :has() is needed to react
-   to it from the html selector. Since our html/body are pinned to a fixed
-   100dvh, that extra push would otherwise overflow the viewport and create
-   a vertical scrollbar. */
-html:has(body.admin-bar) {
+   injects itself) to make room for the admin bar, and marks this state
+   with an "admin-bar" class on <body>. Since our html/body are pinned to
+   a fixed 100dvh each - and dvh is always relative to the viewport, never
+   to a parent's box - both elements need their height reduced by the same
+   amount, or whichever one still has the un-reduced height overflows the
+   other by that amount regardless of what its parent is set to. */
+html:has(body.admin-bar),
+body.admin-bar {
     height: calc(100dvh - 32px);
 }
 
 @media screen and (max-width: 782px) {
-    html:has(body.admin-bar) {
+    html:has(body.admin-bar),
+    body.admin-bar {
         height: calc(100dvh - 46px);
     }
 }
