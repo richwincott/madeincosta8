@@ -21,16 +21,18 @@ html, body {
     overflow-x: hidden;
 }
 
-/* WordPress pushes <html> down with margin-top to make room for the admin
-   bar (adds the "wp-toolbar" class to <html> for exactly this purpose).
-   Since our html/body are pinned to a fixed 100dvh, that extra push would
-   otherwise overflow the viewport and create a vertical scrollbar. */
-html.wp-toolbar {
+/* WordPress pushes <html> down with margin-top (via an inline style it
+   injects itself) to make room for the admin bar. It marks this state with
+   an "admin-bar" class on <body>, not <html> - so :has() is needed to react
+   to it from the html selector. Since our html/body are pinned to a fixed
+   100dvh, that extra push would otherwise overflow the viewport and create
+   a vertical scrollbar. */
+html:has(body.admin-bar) {
     height: calc(100dvh - 32px);
 }
 
 @media screen and (max-width: 782px) {
-    html.wp-toolbar {
+    html:has(body.admin-bar) {
         height: calc(100dvh - 46px);
     }
 }
