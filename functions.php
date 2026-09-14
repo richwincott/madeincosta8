@@ -95,3 +95,20 @@ function mytheme_rename_category_to_collection( $translated_text, $text, $domain
 }
 
 add_filter( 'gettext', 'mytheme_rename_category_to_collection', 10, 3 );
+
+function mytheme_rename_category_to_collection_plural( $translation, $single, $plural, $number, $domain ) {
+    if ( 'woocommerce' !== $domain || is_admin() ) {
+        return $translation;
+    }
+
+    $replacements = array(
+        'Category:'   => 'Collection:',
+        'Categories:' => 'Collections:',
+        'Category'    => 'Collection',
+        'Categories'  => 'Collections',
+    );
+
+    return isset( $replacements[ $single ] ) ? ( 1 === (int) $number ? $replacements[ $single ] : ( isset( $replacements[ $plural ] ) ? $replacements[ $plural ] : $translation ) ) : $translation;
+}
+
+add_filter( 'ngettext', 'mytheme_rename_category_to_collection_plural', 10, 5 );
