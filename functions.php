@@ -53,7 +53,13 @@ function mytheme_enqueue_scripts() {
 add_action( 'wp_enqueue_scripts', 'mytheme_enqueue_scripts' );
 
 function mytheme_coming_soon_gate() {
-    if ( is_user_logged_in() || is_admin() || wp_doing_ajax() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+    if ( current_user_can( 'manage_options' ) || is_admin() || wp_doing_ajax() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+        return;
+    }
+
+    // Always allow the My Account page through (login, register, lost password, orders, etc.)
+    // so customers can create/manage accounts even while the rest of the site is gated.
+    if ( function_exists( 'is_account_page' ) && is_account_page() ) {
         return;
     }
 
