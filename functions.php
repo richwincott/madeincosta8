@@ -112,3 +112,8 @@ function mytheme_rename_category_to_collection_plural( $translation, $single, $p
 }
 
 add_filter( 'ngettext', 'mytheme_rename_category_to_collection_plural', 10, 5 );
+
+// All products are downloadable - disable shipping sitewide (hides the
+// Shipping address section on My Account, shipping fields at checkout,
+// and any shipping calculators).
+add_filter( 'wc_shipping_enabled', '__return_false' );
