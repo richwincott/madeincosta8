@@ -78,3 +78,20 @@ function mytheme_no_page_cache_headers() {
 }
 
 add_action( 'send_headers', 'mytheme_no_page_cache_headers' );
+
+function mytheme_rename_category_to_collection( $translated_text, $text, $domain ) {
+    if ( 'woocommerce' !== $domain || is_admin() ) {
+        return $translated_text;
+    }
+
+    $replacements = array(
+        'Category:'   => 'Collection:',
+        'Categories:' => 'Collections:',
+        'Category'    => 'Collection',
+        'Categories'  => 'Collections',
+    );
+
+    return isset( $replacements[ $text ] ) ? $replacements[ $text ] : $translated_text;
+}
+
+add_filter( 'gettext', 'mytheme_rename_category_to_collection', 10, 3 );
