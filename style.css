@@ -113,6 +113,7 @@ body.single-product .site-content {
     align-items: center;
     gap: 15px;
     margin: 15px 0;
+    justify-content: end;
 }
 
 .price-and-cart .cart {
