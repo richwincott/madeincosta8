@@ -103,6 +103,10 @@ body.home .site-content {
     padding: 0;
 }
 
+body.single-product .site-content {
+    padding-top: 30px;
+}
+
 .home-hero {
     position: relative;
     flex: 1;
