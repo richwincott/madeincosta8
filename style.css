@@ -116,6 +116,9 @@ body.home .site-content {
     border: none;
     cursor: pointer;
     padding: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    color: inherit;
 }
 
 .menu-toggle-bar {
