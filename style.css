@@ -78,6 +78,7 @@ body {
     width: 100%;
     height: 60px;
     box-sizing: border-box;
+    background-color: rgba(255,255,255,0.85);
 }
 
 .site-branding img {
@@ -95,6 +96,7 @@ body {
     display: flex;
     align-items: center;
     list-style: none;
+    height: 60px;
     margin: 0;
     padding: 0;
 }
@@ -105,7 +107,7 @@ body {
 
 .nav-menu li a {
     display: inline-block;
-    padding: 20px 25px;
+    padding: 16.687px 25px;
     text-decoration: none;
     color: inherit;
     border-bottom: 2px solid transparent;
@@ -145,7 +147,7 @@ body.single-product .site-content {
 }
 
 .home-hero {
-    position: relative;
+    position: fixed;
     flex: 1;
     min-height: 0;
     display: flex;
@@ -154,6 +156,9 @@ body.single-product .site-content {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    height: 100dvh;
+    width: 100dvw;
+    z-index: -1;
 }
 
 .home-hero-overlay {
