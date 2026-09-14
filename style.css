@@ -6,6 +6,25 @@ Description: WordPress theme for https://madeincosta8.com/
 Version: 1.0
 */
 
+:root {
+    /* Color palette - central reference point, not yet applied globally */
+    --color-background: #ffffff;
+    --color-text: #212121;
+    --color-accent: #8a7a5c;
+
+    /* Semantic tokens - reference the palette above rather than raw colors */
+    --special-text: var(--color-accent);
+    --button-background: var(--color-accent);
+    --button-text: var(--color-text);
+
+    /* Typography */
+    --font-family-base: Verdana, Geneva, Tahoma, sans-serif ;
+    --font-size-base: 16px;
+    --font-size-sm: 0.875rem;
+    --font-size-lg: 1.2rem;
+    --line-height-base: 1.5;
+}
+
 /* Prevent iOS Safari auto-zooming the page when a form field is focused
    (it does this for any input/textarea/select under 16px font-size) */
 input,
@@ -41,7 +60,11 @@ body.admin-bar {
 }
 
 body {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    background-color: var(--color-background);
+    color: var(--color-text);
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -183,8 +206,8 @@ body.single-product .site-content {
 .collection-card-title {
     position: relative;
     z-index: 1;
-    color: #fff;
-    font-size: 1.2rem;
+    color: var(--color-text);
+    font-size: var(--font-size-lg);
     text-align: center;
     padding: 0 10px;
 }
@@ -241,8 +264,8 @@ body.single-product .site-content {
         width: min(280px, 80%);
         height: 100%;
         box-sizing: border-box;
-        background: #fff;
-        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+        background: var(--color-background);
+        border-left: 1px solid var(--color-accent);
         padding-top: 80px;
         overflow-y: auto;
         transform: translateX(100%);
@@ -270,3 +293,11 @@ body.single-product .site-content {
         padding: 20px 30px;
     }
 }
+
+/* WooCommerce price */
+.woocommerce .price {
+    color: var(--special-text);
+}
+
+/* Buttons intentionally left at WooCommerce's default purple - see
+   --button-background/--button-text in :root if that ever needs to change. */
