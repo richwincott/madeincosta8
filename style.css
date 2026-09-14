@@ -220,7 +220,7 @@ body.single-product .site-content {
     gap: 5px;
     width: 32px;
     height: 24px;
-    margin-right: 40px;
+    margin: 18px 40px;
     background: none;
     border: none;
     cursor: pointer;
@@ -265,7 +265,7 @@ body.single-product .site-content {
         height: 100%;
         box-sizing: border-box;
         background: var(--color-background);
-        border-left: 1px solid var(--color-accent);
+        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
         padding-top: 80px;
         overflow-y: auto;
         transform: translateX(100%);

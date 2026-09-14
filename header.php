@@ -18,13 +18,6 @@
 			<?php endif; ?>
 		</div>
 
-		<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
-			<span class="menu-toggle-bar"></span>
-			<span class="menu-toggle-bar"></span>
-			<span class="menu-toggle-bar"></span>
-			<span class="screen-reader-text">Menu</span>
-		</button>
-
 		<nav class="main-navigation">
 			<?php
 				wp_nav_menu( array(
@@ -36,4 +29,11 @@
 				) );
 			?>
 		</nav>
+
+		<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+			<span class="menu-toggle-bar"></span>
+			<span class="menu-toggle-bar"></span>
+			<span class="menu-toggle-bar"></span>
+			<span class="screen-reader-text">Menu</span>
+		</button>
 	</header>
