@@ -301,3 +301,29 @@ body.single-product .site-content {
 
 /* Buttons intentionally left at WooCommerce's default purple - see
    --button-background/--button-text in :root if that ever needs to change. */
+
+/* Cart icon in the nav menu */
+.cart-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.cart-contents-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 0.7rem;
+    line-height: 1;
+}

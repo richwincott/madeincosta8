@@ -131,3 +131,34 @@ function mytheme_price_and_add_to_cart() {
     woocommerce_template_single_add_to_cart();
     echo '</div>';
 }
+
+// Replace the Cart link's label in the nav menu with a cart icon + item
+// count badge, without touching any other menu item.
+function mytheme_cart_nav_icon( $title, $item, $args, $depth ) {
+    if ( ! function_exists( 'wc_get_page_id' ) || ! function_exists( 'WC' ) ) {
+        return $title;
+    }
+
+    if ( 'page' !== $item->object || (int) $item->object_id !== wc_get_page_id( 'cart' ) ) {
+        return $title;
+    }
+
+    $count = WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
+
+    return '<span class="cart-icon">'
+        . '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>'
+        . '<span class="cart-contents-count">' . esc_html( $count ) . '</span>'
+        . '</span>';
+}
+
+add_filter( 'nav_menu_item_title', 'mytheme_cart_nav_icon', 10, 4 );
+
+// Keep that badge live-updated via WooCommerce's existing AJAX cart-fragments
+// system, so it changes instantly after Add to Cart with no page reload.
+function mytheme_cart_count_fragment( $fragments ) {
+    $count = WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
+    $fragments['.cart-contents-count'] = '<span class="cart-contents-count">' . esc_html( $count ) . '</span>';
+    return $fragments;
+}
+
+add_filter( 'woocommerce_add_to_cart_fragments', 'mytheme_cart_count_fragment' );
