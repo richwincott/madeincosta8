@@ -117,3 +117,17 @@ add_filter( 'ngettext', 'mytheme_rename_category_to_collection_plural', 10, 5 );
 // Shipping address section on My Account, shipping fields at checkout,
 // and any shipping calculators).
 add_filter( 'wc_shipping_enabled', '__return_false' );
+
+// Move price out of its default position (right after the title) and group
+// it with the Add to Cart button instead, placed after the short
+// description. Wrapped in a shared div so the two can sit side by side.
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
+add_action( 'woocommerce_single_product_summary', 'mytheme_price_and_add_to_cart', 25 );
+
+function mytheme_price_and_add_to_cart() {
+    echo '<div class="price-and-cart">';
+    woocommerce_template_single_price();
+    woocommerce_template_single_add_to_cart();
+    echo '</div>';
+}

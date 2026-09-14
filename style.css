@@ -107,6 +107,19 @@ body.single-product .site-content {
     padding-top: 30px;
 }
 
+.price-and-cart {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.price-and-cart .cart {
+    margin-bottom: 1em !important;
+    margin-top: 1em;
+}
+
 .home-hero {
     position: relative;
     flex: 1;
