@@ -11,11 +11,9 @@
 
 	<header class="site-header">
 		<div class="site-branding">
-			<?php if ( ! is_page( 'home' ) ) : ?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
 				<img src="<?php echo get_template_directory_uri(); ?>/img/763907261_18003302318978503_5232659097694014864_n.png" class="site-logo" alt="<?php bloginfo( 'name' ); ?>">
 			</a>
-			<?php endif; ?>
 		</div>
 
 		<nav class="main-navigation">
