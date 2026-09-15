@@ -1,11 +1,11 @@
-    <div style="display: flex;
-        align-items: center;
-        justify-content: center;"><a href="https://www.instagram.com/madeincosta8/" style="display: flex;
-        align-items: center;
-        justify-content: center; padding-right: 10px; font-size: 14px;">
-            <img src="<?php echo get_template_directory_uri(); ?>/img/instagram_logo_icon_189247-4278989595.png" width="40px" alt="">
-            <span style="padding-bottom: 2px;">madeincosta8</span>
-        </a></div>
+    <div class="site-footer">
+        <div class="site-footer-left">&copy; madeincosta8.com</div>
+        <div class="site-footer-right">
+            <a href="<?php echo esc_url( home_url( '/terms-and-conditions' ) ); ?>">Terms and Conditions</a>
+            <span aria-hidden="true"> | </span>
+            <a href="<?php echo esc_url( home_url( '/privacy-policy' ) ); ?>">Privacy Policy</a>
+        </div>
+    </div>
 
     <?php wp_footer(); ?>
     </body>

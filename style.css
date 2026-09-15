@@ -310,9 +310,10 @@ body.single-product .site-content {
 /* Buttons intentionally left at WooCommerce's default purple - see
    --button-background/--button-text in :root if that ever needs to change. */
 
-/* Cart icon in the nav menu */
+/* Cart, account and Instagram icons in the nav menu */
 .cart-icon,
-.account-icon {
+.account-icon,
+.instagram-icon {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -335,4 +336,31 @@ body.single-product .site-content {
     color: #fff;
     font-size: 0.7rem;
     line-height: 1;
+}
+
+/* Footer */
+.site-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 15px 30px;
+    font-size: 14px;
+}
+
+.site-footer-right a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.site-footer-right a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .site-footer {
+        flex-direction: column;
+        text-align: center;
+    }
 }

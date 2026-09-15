@@ -171,6 +171,35 @@ function mytheme_account_nav_icon( $title, $item, $args, $depth ) {
 
 add_filter( 'nav_menu_item_title', 'mytheme_account_nav_icon', 10, 4 );
 
+// Replace the Instagram link's label in the nav menu with an Instagram icon.
+// It's a custom link rather than a WP/WC page, so match it by URL instead.
+function mytheme_instagram_nav_icon( $title, $item, $args, $depth ) {
+    if ( 'custom' !== $item->object || false === strpos( $item->url, 'instagram.com' ) ) {
+        return $title;
+    }
+
+    return '<span class="instagram-icon">'
+        . '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>'
+        . '</span>';
+}
+
+add_filter( 'nav_menu_item_title', 'mytheme_instagram_nav_icon', 10, 4 );
+
+// Open the Instagram link in a new tab, matched the same way as the icon
+// above (by URL, since it's a custom link).
+function mytheme_instagram_nav_link_attributes( $atts, $item, $args, $depth ) {
+    if ( 'custom' !== $item->object || false === strpos( $item->url, 'instagram.com' ) ) {
+        return $atts;
+    }
+
+    $atts['target'] = '_blank';
+    $atts['rel']    = 'noopener';
+
+    return $atts;
+}
+
+add_filter( 'nav_menu_link_attributes', 'mytheme_instagram_nav_link_attributes', 10, 4 );
+
 // Keep that badge live-updated via WooCommerce's existing AJAX cart-fragments
 // system, so it changes instantly after Add to Cart with no page reload.
 function mytheme_cart_count_fragment( $fragments ) {
