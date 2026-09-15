@@ -249,3 +249,34 @@ function mytheme_store_address_shortcode() {
 }
 
 add_shortcode( 'wc_store_address', 'mytheme_store_address_shortcode' );
+
+// Workaround: this version of Jetpack renders the contact form's
+// Interactivity-API markup (data-wp-bind/data-wp-class state toggling for
+// the form/success/error views) but never actually enqueues its own
+// "grunion.css" stylesheet that those toggled classes depend on - so the JS
+// state management works, but nothing is visually hidden. Load it directly
+// on any page that actually contains the form.
+function mytheme_enqueue_jetpack_forms_style() {
+    global $post;
+
+    if ( ! $post ) {
+        return;
+    }
+
+    $has_form = has_shortcode( $post->post_content, 'contact-form' ) || has_block( 'jetpack/contact-form', $post );
+
+    if ( ! $has_form ) {
+        return;
+    }
+
+    $css_relative_path = 'jetpack/jetpack_vendor/automattic/jetpack-forms/dist/contact-form/css/grunion.css';
+    $css_path           = WP_PLUGIN_DIR . '/' . $css_relative_path;
+
+    if ( ! file_exists( $css_path ) ) {
+        return;
+    }
+
+    wp_enqueue_style( 'mytheme-jetpack-forms-grunion', plugins_url( $css_relative_path ), array(), filemtime( $css_path ) );
+}
+
+add_action( 'wp_enqueue_scripts', 'mytheme_enqueue_jetpack_forms_style' );
