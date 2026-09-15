@@ -132,6 +132,21 @@ function mytheme_price_and_add_to_cart() {
     echo '</div>';
 }
 
+// Replace the Home link's label in the nav menu with a home icon, without
+// touching any other menu item. Matched by label rather than page ID, since
+// page IDs differ between environments (e.g. local vs. live database).
+function mytheme_home_nav_icon( $title, $item, $args, $depth ) {
+    if ( 'page' !== $item->object || 0 !== strcasecmp( trim( $item->title ), 'Home' ) ) {
+        return $title;
+    }
+
+    return '<span class="home-icon">'
+        . '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>'
+        . '</span>';
+}
+
+add_filter( 'nav_menu_item_title', 'mytheme_home_nav_icon', 10, 4 );
+
 // Replace the Cart link's label in the nav menu with a basket icon + item
 // count badge, without touching any other menu item.
 function mytheme_cart_nav_icon( $title, $item, $args, $depth ) {
@@ -209,3 +224,28 @@ function mytheme_cart_count_fragment( $fragments ) {
 }
 
 add_filter( 'woocommerce_add_to_cart_fragments', 'mytheme_cart_count_fragment' );
+
+// [wc_store_address] - outputs the store address configured in WooCommerce
+// (Settings > General), so pages like Contact stay in sync with it rather
+// than hardcoding the address separately.
+function mytheme_store_address_shortcode() {
+    if ( ! function_exists( 'WC' ) ) {
+        return '';
+    }
+
+    $countries = WC()->countries;
+    $country_code = $countries->get_base_country();
+    $country_name = isset( $countries->countries[ $country_code ] ) ? $countries->countries[ $country_code ] : '';
+
+    $parts = array_filter( array(
+        $countries->get_base_address(),
+        $countries->get_base_address_2(),
+        $countries->get_base_city(),
+        $countries->get_base_postcode(),
+        $country_name,
+    ) );
+
+    return esc_html( implode( ', ', $parts ) );
+}
+
+add_shortcode( 'wc_store_address', 'mytheme_store_address_shortcode' );

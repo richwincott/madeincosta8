@@ -310,7 +310,8 @@ body.single-product .site-content {
 /* Buttons intentionally left at WooCommerce's default purple - see
    --button-background/--button-text in :root if that ever needs to change. */
 
-/* Cart, account and Instagram icons in the nav menu */
+/* Home, cart, account and Instagram icons in the nav menu */
+.home-icon,
 .cart-icon,
 .account-icon,
 .instagram-icon {
