@@ -365,3 +365,20 @@ body.single-product .site-content {
         text-align: center;
     }
 }
+
+/* Contact page: two columns (Gutenberg's Columns block already stacks
+   these on mobile natively - no extra media query needed for that part) */
+.wp-block-columns {
+    gap: 40px;
+}
+
+/* Stack the contact form's fields vertically instead of side by side */
+.wp-block-jetpack-contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.wp-block-jetpack-contact-form > * {
+    width: 100%;
+}
