@@ -10,6 +10,7 @@ Version: 1.0
     /* Color palette - central reference point, not yet applied globally */
     --color-background: #ffffff;
     --color-text: #212121;
+    --color-text-i: #DEDEDE;
     --color-accent: #8a7a5c;
 
     /* Semantic tokens - reference the palette above rather than raw colors */
@@ -176,34 +177,32 @@ body.single-product .site-content {
     width: 60%;
     max-width: 400px;
     height: auto;
-    filter: invert(1);
+    color: var(--color-text-i);
 }
 
 /* Styled to match WooCommerce's own default button appearance, since the
    WooCommerce Blocks stylesheet those classes normally rely on isn't loaded
    on this page (it's only enqueued where WC actually detects a Cart/Checkout
    block) - this reproduces the same look with plain, always-available CSS. */
-.home-cta-button, 
+.home-cta-button,
 .woocommerce a.button,
 .woocommerce button.button,
 .woocommerce input.button,
 .woocommerce #respond input#submit,
 .wp-element-button {
     display: inline-block;
-    background-color: #e5e5e5;
-    color: #000000;
+    box-sizing: border-box;
+    background-color: var(--color-accent) !important;
+    color: #ffffff !important;
     text-decoration: none;
-    font-weight: 400;
-    padding: 12px 24px;
-    border-radius: 2px;
-}
-
-.woocommerce a.button,
-.woocommerce button.button,
-.woocommerce input.button,
-.woocommerce #respond input#submit,
-.wp-element-button {
-    filter: invert(1);
+    font-family: var(--font-family-base) !important;
+    font-size: 15px !important;
+    line-height: 1.2 !important;
+    font-weight: 700 !important;
+    padding: 11px 22px 12px !important;
+    border: none !important;
+    border-radius: 3px !important;
+    -webkit-font-smoothing: antialiased !important;
 }
 
 .woocommerce a.button:hover,
@@ -211,8 +210,8 @@ body.single-product .site-content {
 .woocommerce input.button:hover,
 .woocommerce #respond input#submit:hover,
 .wp-element-button:hover {
-    background-color: #e5e5e5;
-    color: #000000;
+    background-color: var(--color-accent);
+    color: #ffffff;
 }
 
 /* Collections grid */
