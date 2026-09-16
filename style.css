@@ -179,6 +179,42 @@ body.single-product .site-content {
     filter: invert(1);
 }
 
+/* Styled to match WooCommerce's own default button appearance, since the
+   WooCommerce Blocks stylesheet those classes normally rely on isn't loaded
+   on this page (it's only enqueued where WC actually detects a Cart/Checkout
+   block) - this reproduces the same look with plain, always-available CSS. */
+.home-cta-button, 
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button,
+.woocommerce #respond input#submit,
+.wp-element-button {
+    display: inline-block;
+    background-color: #e5e5e5;
+    color: #000000;
+    text-decoration: none;
+    font-weight: 400;
+    padding: 12px 24px;
+    border-radius: 2px;
+}
+
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button,
+.woocommerce #respond input#submit,
+.wp-element-button {
+    filter: invert(1);
+}
+
+.woocommerce a.button:hover,
+.woocommerce button.button:hover,
+.woocommerce input.button:hover,
+.woocommerce #respond input#submit:hover,
+.wp-element-button:hover {
+    background-color: #e5e5e5;
+    color: #000000;
+}
+
 /* Collections grid */
 .collections-grid {
     display: grid;
