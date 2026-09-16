@@ -52,8 +52,22 @@ function mytheme_enqueue_scripts() {
 
 add_action( 'wp_enqueue_scripts', 'mytheme_enqueue_scripts' );
 
+// A role for people who should see the full (unfinished) site early,
+// without being a full Administrator - e.g. a client previewing before
+// launch. Attach the "view_site_before_launch" capability to whatever role
+// someone needs this access via (this one, or a different/future role) -
+// the gate below checks the capability, not a specific role name.
+function mytheme_register_site_previewer_role() {
+    add_role( 'site_previewer', 'Site Previewer', array(
+        'read'                     => true,
+        'view_site_before_launch'  => true,
+    ) );
+}
+
+add_action( 'init', 'mytheme_register_site_previewer_role' );
+
 function mytheme_coming_soon_gate() {
-    if ( current_user_can( 'manage_options' ) || is_admin() || wp_doing_ajax() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+    if ( current_user_can( 'manage_options' ) || current_user_can( 'view_site_before_launch' ) || is_admin() || wp_doing_ajax() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
         return;
     }
 
@@ -66,6 +80,16 @@ function mytheme_coming_soon_gate() {
     include get_template_directory() . '/coming-soon.php';
     exit;
 }
+
+// Hide the wp-admin toolbar on the front end for this role specifically -
+// admins still see theirs as normal.
+function mytheme_hide_admin_bar_for_previewer() {
+    if ( current_user_can( 'view_site_before_launch' ) && ! current_user_can( 'manage_options' ) ) {
+        show_admin_bar( false );
+    }
+}
+
+add_action( 'after_setup_theme', 'mytheme_hide_admin_bar_for_previewer' );
 
 add_action( 'template_redirect', 'mytheme_coming_soon_gate' );
 
