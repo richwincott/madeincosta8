@@ -389,6 +389,7 @@ body.single-product .site-content {
     gap: 10px;
     padding: 15px 30px;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
 .site-footer-right a {
