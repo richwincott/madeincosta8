@@ -109,7 +109,7 @@ body {
     display: flex;
     align-items: center;
     list-style: none;
-    height: 100px;
+    height: 102px;
     margin: 0;
     padding: 0;
 }
@@ -120,7 +120,7 @@ body {
 
 .nav-menu li a {
     display: inline-block;
-    padding: 52px 25px 20px;
+    padding: 52px 25px 22px;
     text-decoration: none;
     color: inherit;
     border-bottom: 4px solid transparent;
